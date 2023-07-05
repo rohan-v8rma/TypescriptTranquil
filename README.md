@@ -1,3 +1,67 @@
+# INDEX
+
+- [INDEX](#index)
+- [TypeScript related terms](#typescript-related-terms)
+  - [Transpiling](#transpiling)
+  - [Ambient types](#ambient-types)
+- [Using locally installed typescript compiler](#using-locally-installed-typescript-compiler)
+- [Making VS code perform intellisense based on TypeScript version in project](#making-vs-code-perform-intellisense-based-on-typescript-version-in-project)
+- [`tsconfig.json` being ignored when source files manually specified](#tsconfigjson-being-ignored-when-source-files-manually-specified)
+- [Faulty error when `.ts` and compiled `.js` file are open together in editor](#faulty-error-when-ts-and-compiled-js-file-are-open-together-in-editor)
+- [Why we compile TS to `ESNext` (TODO)](#why-we-compile-ts-to-esnext-todo)
+
+# TypeScript related terms
+
+## Transpiling
+
+- Transpiling, short for "source to source compiling," refers to the process of converting source code from one higher-level programming language to another higher-level programming language. 
+
+- Unlike traditional compilation, which typically involves converting higher-level code to lower-level code (such as machine code), transpiling allows you to write code in one language and then convert it into another language that is also at a higher level of abstraction.
+
+- For example, TypeScript is a higher-level language that adds static typing and additional features to JavaScript. When you transpile TypeScript code, you convert it into JavaScript code, which is another higher-level language. 
+  
+  This allows you to write code in TypeScript, taking advantage of its features, and then transpile it into JavaScript that can be executed by JavaScript engines.
+
+## Ambient types
+
+- In the context of TypeScript, the phrase "types can be ambient" refers to the ability to define type information for existing JavaScript code or external libraries without having to modify the original code itself. 
+
+  It allows TypeScript to understand and provide type information for JavaScript code, enabling static type checking and code intelligence features.
+
+- Ambient types are typically defined in separate TypeScript declaration files (with a `.d.ts` extension) that contain only type declarations. 
+
+  These type declarations describe the shape and behavior of the JavaScript code in terms of TypeScript types.
+  
+  Here's an example of an ambient type declaration for an existing JavaScript library:
+
+  ```typescript
+  // my-library.d.ts
+  declare namespace MyLibrary {
+    function doSomething(arg: string): void;
+    function calculate(a: number, b: number): number;
+    // ... other type declarations
+  }
+  ```
+
+  With this ambient type declaration, you can now use the `MyLibrary` functions in your TypeScript code and benefit from type checking:
+
+  ```typescript
+  import { MyLibrary } from 'my-library';
+
+  MyLibrary.doSomething('Hello');
+  const result = MyLibrary.calculate(5, 10);
+  ```
+
+- By making types ambient, TypeScript allows developers to gradually introduce type safety to their JavaScript codebases and leverage the benefits of static typing without requiring extensive modifications to existing code. 
+
+  It enables seamless integration with JavaScript libraries and frameworks, making it easier to work with existing codebases in a type-safe manner.
+
+> ***Note***: Definitions for most of the popular JavaScript libraries have already been written by the [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) community so for most purposes:
+> - The definition file already exists.
+> 
+>   Or at the very least, 
+> - You have a vast list of well reviewed TypeScript declaration templates already available.
+
 # Using locally installed typescript compiler
 
 - `tsc` is a binary of the `typescript` module that we need to explicitly reference from the sub-folder of its module folder. 
